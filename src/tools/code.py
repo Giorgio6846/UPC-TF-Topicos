@@ -45,6 +45,6 @@ def execute_script() -> subprocess.CompletedProcess:
     remote_ip = getenv("REMOTE_IP", "remote")
     remote_path = getenv("REMOTE_PATH", "/path/to/destination/script.sh")
     
-    result = subprocess.run(['ssh', f'{user}@{remote_ip}', '&', 'sh', f'{remote_path}/test.sh'], capture_output=True, text=True, check=True)
+    result = subprocess.run(['ssh', f'{user}@{remote_ip}', 'sh', f'{remote_path}/test.sh'], capture_output=True, text=True, check=True)
     cat = subprocess.run(['ssh', f'{user}@{remote_ip}', 'cat', f'{remote_path}/output.log'], capture_output=True, text=True, check=True)
     return cat
