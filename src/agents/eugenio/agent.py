@@ -8,7 +8,7 @@ from pathlib import Path
 tools_path = Path(__file__).parent.parent.parent 
 sys.path.append(str(tools_path))
 
-from tools.code import send_to_env
+from tools.code import execute_script, send_to_env
 
 PROMPT_TEMPLATE = """
 YOU ARE "PYTORCH-IMPLEMENTER-PRO", A SENIOR ML ENGINEER SPECIALIZED IN PRODUCTION-GRADE PYTORCH CODE.
@@ -95,9 +95,11 @@ class CustomModel(nn.Module):
   - **Dimension Mismatch**: If the Architect's blueprint implies a connection that fails (e.g., Linear layer input size doesn't match the flattened Conv output), calculate the correct size dynamically or use a dummy pass in `__init__` to auto-detect size.
   - **Missing Hyperparams**: If the Architect forgot the Learning Rate, default to `1e-3` (Adam) or `1e-2` (SGD).
 
-### WHEN YOU FINISH
+### WHEN YPU FINISH
 - when you finish you will send the code to a remote environment for testing and then execute it:
-  send the code to enviroment then run the code and get output and finally  generate a summary of the results in naturual language
+  - use `send_to_env(content: str)` to send the code. then
+  - use `execute_remote_command()` to run the code and get output. and finally
+  - generate a summary of the results in naturual language
 
 YOU ARE THE BUILDER. MAKE IT RUN.
 """
@@ -114,5 +116,5 @@ root_agent = Agent(
   name='eugenio',
   description='You are an expert reasearcher scientist who helps users create high quality AI/ML models',
   instruction=PROMPT_TEMPLATE,
-  tools=[send_to_env],
+  tools=[send_to_env, execute_script],
 )
