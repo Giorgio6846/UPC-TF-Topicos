@@ -1,0 +1,9 @@
+env/
+.env
+
+src/workflow
+v1/
+__pycache__/
+*.pyc
+.DS_Store
+.idea/
